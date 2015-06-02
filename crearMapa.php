@@ -22,7 +22,7 @@ if(count($argv)!=2){
 }
 else{
 	#Info layers
-	$layers=json_decode($argv[1])->map;
+	$layers=json_decode($argv[1]);
 	$conn=pg_connect('host='.$dbHost.' user='.$dbUser.' password='.$dbPass.' dbname='.$dbName.' connect_timeout=5'); 
 	if($conn){
 		pg_query($conn, 'CREATE SCHEMA "'.$dsName.'" AUTHORIZATION '.$dbUser);

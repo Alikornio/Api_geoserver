@@ -39,22 +39,20 @@ class GeoserverWrapper {
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		} else if ($method == 'DELETE' || $method == 'PUT') {
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 		}
-
 		if ($data != '') {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, 
 				array("Content-Type: $contentType",
 				'Content-Length: '.strlen($data))
 			);
 		}
-
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+		
 		$rslt = curl_exec($ch);
 		$info = curl_getinfo($ch);
-		
 		if ($info['http_code'] == 401) {
 			return 'Access denied. Check login credentials.';
 		} else {
@@ -86,7 +84,13 @@ class GeoserverWrapper {
 		}
 		return false;
 	}
+	public function enableWms($workspaceName){
+		return $this->runApi('services/wms/workspaces/'.urlencode($workspaceName).'/settings.xml', 'PUT', '<wms><enabled>true</enabled></wms>');
+	}
 
+	public function disableWms($workspaceName){
+		return $this->runApi('services/wms/workspaces/'.urlencode($workspaceName).'/settings.xml', 'PUT', '<wms><enabled>false</enabled></wms>');
+	}
 // Datastore APIs
 	public function listDataStores($workspaceName) {
 		return json_decode($this->runApi('workspaces/'.urlencode($workspaceName).'/datastores.json'));
