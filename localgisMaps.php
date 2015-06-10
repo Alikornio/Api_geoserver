@@ -1,9 +1,9 @@
 <?php
 	include "GeoserverWrapper.php";
-	include "connection.php";
+	include "Connection.php";
 	include "LocalgisMap.php";
 
-	var_dump(listMaps());
+	print(listMaps());
 
 	function listMaps() {
 		$connection = new ServerConnection();
@@ -25,7 +25,7 @@
 		    $maps[$i]= new LocalgisMap($col);
 		    $i=$i+1;
 		}
-		return $maps;
+		return json_encode($maps);
 	}
 
 	/*
