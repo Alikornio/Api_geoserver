@@ -1,12 +1,12 @@
 <?php
 
-include "GeoserverWrapper.php";
+include "ApiRest.php";
 
 $username="admin";
 $password="geoserver";
 $workspaceName="Unit_DS_WS";
 $dataStore="Unit_DS_DS";
-$geoserver = new GeoserverWrapper('http://localhost:8080/geoserver',$username, $password);
+$geoserver = new ApiRest('http://localhost:8080/geoserver',$username, $password);
 
 if(($result=$geoserver->createWorkspace($workspaceName))!="")
 	print("Advice".$result."\n");

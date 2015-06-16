@@ -1,6 +1,6 @@
 <?php
 
-include "GeoserverWrapper.php";
+include "ApiRest.php";
 
 $username="admin";
 $password="geoserver";
@@ -8,7 +8,7 @@ $workspaceName="Localgis2";
 $datastoreName="Localgis2";
 $layerName="bez_parcelario_planta00";
 $layerDescription="Unit_L description";
-$geoserver = new GeoserverWrapper('http://localhost:8080/geoserver',$username, $password);
+$geoserver = new ApiRest('http://localhost:8080/geoserver',$username, $password);
 
 $listStyles=$geoserver->listStyles();
 echo "#### Lista de Estilos ####\n";

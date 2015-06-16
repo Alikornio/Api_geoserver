@@ -1,6 +1,7 @@
 <?php
 	class ServerConnection {
 		#Info database
+		var $dbSchema= '';
 		var $dbName= '';
 		var $dbUser= '';
 		var $dbPass= '';
@@ -13,6 +14,7 @@
 		var $dsName= '';
 
 		public function __construct(){
+			$this->dbSchema="public";
 			$this->dbName="Localgis";
 			$this->dbUser="postgres";
 			$this->dbPass="1234";

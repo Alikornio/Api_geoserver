@@ -1,11 +1,11 @@
 <?php
 
-include "GeoserverWrapper.php";
+include "ApiRest.php";
 
 $username="admin";
 $password="geoserver";
 $workspaceName="Unit_WS";
-$geoserver = new GeoserverWrapper('http://localhost:8080/geoserver',$username, $password);
+$geoserver = new ApiRest('http://localhost:8080/geoserver',$username, $password);
 
 $listWorkspaces=$geoserver->listWorkspaces();
 if($geoserver->existsWorkspace($workspaceName))
